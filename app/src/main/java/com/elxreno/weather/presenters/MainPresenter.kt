@@ -37,9 +37,13 @@ class MainPresenter : MvpPresenter<MainView>() {
                                 "Temperature(Min): ${weatherToday?.temp?.minTemp}\n" +
                                 "Temperature(Max): ${weatherToday?.temp?.maxTemp}\n"
 
+                        Log.w("DEBUG", result)
+                        Log.w("DEBUG", weatherToday.toString())
+
                         viewState.showTodayWeather(result)
                     }
 
+                    Log.w("DEBUG", response.message())
                 }
 
             })
