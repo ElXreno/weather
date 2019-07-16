@@ -21,7 +21,7 @@ class MainPresenter : MvpPresenter<MainView>() {
 
     fun onCreateSuccess() {
         val cityId = 620127
-        val authToken = BuildConfig.OWM_TOKEN
+        val authToken = BuildConfig.openWeatherMapKey
 
         WeatherService().getInstance()
             .getWeatherApi()
