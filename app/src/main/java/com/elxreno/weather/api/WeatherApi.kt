@@ -1,6 +1,6 @@
 package com.elxreno.weather.api
 
-import com.elxreno.weather.models.weather.today.WeatherToday
+import com.elxreno.weather.dto.WeatherToday
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

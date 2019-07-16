@@ -1,6 +1,6 @@
-package com.elxreno.weather.models.weather.today
+package com.elxreno.weather.dto
 
-import com.elxreno.weather.models.weather.*
+import com.elxreno.weather.dto.*
 import com.google.gson.annotations.SerializedName
 
 data class WeatherToday(

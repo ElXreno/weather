@@ -1,4 +1,4 @@
-package com.elxreno.weather.models.weather
+package com.elxreno.weather.dto
 
 data class WeatherSys(
 

@@ -1,4 +1,4 @@
-package com.elxreno.weather.models.weather
+package com.elxreno.weather.dto
 
 import com.google.gson.annotations.SerializedName
 

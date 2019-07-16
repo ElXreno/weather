@@ -4,7 +4,7 @@ import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.elxreno.weather.BuildConfig
-import com.elxreno.weather.models.weather.today.WeatherToday
+import com.elxreno.weather.dto.WeatherToday
 import com.elxreno.weather.services.WeatherService
 import com.elxreno.weather.views.MainView
 import retrofit2.Call
