@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
+import org.jetbrains.kotlin.gradle.dsl.Coroutines
 
 val openWeatherMapKey: String by project
 
@@ -7,6 +8,12 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+}
+
+kotlin {
+    experimental {
+        coroutines = Coroutines.ENABLE
+    }
 }
 
 android {
@@ -36,7 +43,10 @@ android {
 
 dependencies {
     // Kotlin stuff
+    val coroutinesVersion = "1.3.0-M2"
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KotlinCompilerVersion.VERSION}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
 
     // AndroidX stuff
     implementation("androidx.appcompat:appcompat:1.0.2")
