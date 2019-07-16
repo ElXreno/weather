@@ -1,33 +1,33 @@
-package com.elxreno.weather.dto
+package com.elxreno.weather.dto.weather
 
-import com.elxreno.weather.dto.*
+import com.elxreno.weather.dto.weather.today.*
 import com.google.gson.annotations.SerializedName
 
-data class WeatherToday(
+data class WeatherTodayDto(
 
     @SerializedName("coord")
-    val coordinates: WeatherCoordinates,
+    val coordinates: TodayCoordinates,
 
     @SerializedName("weather")
-    val description: ArrayList<WeatherDescription>,
+    val description: ArrayList<TodayDescription>,
 
     @SerializedName("base")
     val base: String,
 
     @SerializedName("main")
-    val temp: WeatherTemp,
+    val main: TodayTemp,
 
     @SerializedName("wind")
-    val wind: WeatherWind,
+    val wind: TodayWind,
 
     @SerializedName("clouds")
-    val clouds: WeatherClouds,
+    val clouds: TodayClouds,
 
     @SerializedName("dt")
     val timestamp: Long,
 
     @SerializedName("sys")
-    val sys: WeatherSys,
+    val sys: TodaySys,
 
     @SerializedName("timezone")
     val timezone: Int,

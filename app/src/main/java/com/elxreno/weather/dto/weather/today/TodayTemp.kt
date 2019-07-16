@@ -1,8 +1,8 @@
-package com.elxreno.weather.dto
+package com.elxreno.weather.dto.weather.today
 
 import com.google.gson.annotations.SerializedName
 
-data class WeatherTemp (
+data class TodayTemp (
 
     val temp: Double,
 

@@ -1,6 +1,7 @@
 package com.elxreno.weather.api
 
-import com.elxreno.weather.dto.WeatherToday
+import com.elxreno.weather.dto.weather.WeatherForecastDto
+import com.elxreno.weather.dto.weather.WeatherTodayDto
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,7 +12,7 @@ interface WeatherApi {
         @Query("id") id: Int,
         @Query("appid") token: String,
         @Query("units") units: String = "metric"
-    ): Call<WeatherToday>
+    ): Call<WeatherTodayDto>
 
     @GET("weather")
     fun getWeatherTodayByCoordinates(
@@ -19,14 +20,14 @@ interface WeatherApi {
         @Query("lon") lon: Double,
         @Query("appid") token: String,
         @Query("units") units: String = "metric"
-    ): Call<WeatherToday>
+    ): Call<WeatherTodayDto>
 
     @GET("forecast")
     fun getWeatherForecastById(
         @Query("id") id: Int,
         @Query("appid") token: String,
         @Query("units") units: String = "metric"
-    ): Call<WeatherToday>
+    ): Call<WeatherForecastDto>
 
     @GET("forecast")
     fun getWeatherForecastByCoordinates(
@@ -34,5 +35,5 @@ interface WeatherApi {
         @Query("lon") lon: Double,
         @Query("appid") token: String,
         @Query("units") units: String = "metric"
-    ): Call<WeatherToday>
+    ): Call<WeatherForecastDto>
 }

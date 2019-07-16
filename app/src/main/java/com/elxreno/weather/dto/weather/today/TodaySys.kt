@@ -1,6 +1,6 @@
-package com.elxreno.weather.dto
+package com.elxreno.weather.dto.weather.today
 
-data class WeatherSys(
+data class TodaySys(
 
     val message: Double,
     val country: String,
