@@ -63,17 +63,20 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 
     // Moxy
-    implementation("tech.schoolhelper:moxy-x:1.7.0")
-    implementation("tech.schoolhelper:moxy-x-androidx:1.7.0")
-    kapt("tech.schoolhelper:moxy-x-compiler:1.7.0")
+    val moxyVersion = "1.7.0"
+    implementation("tech.schoolhelper:moxy-x:$moxyVersion")
+    implementation("tech.schoolhelper:moxy-x-androidx:$moxyVersion")
+    kapt("tech.schoolhelper:moxy-x-compiler:$moxyVersion")
 
     // Anko
-    implementation("org.jetbrains.anko:anko-commons:0.10.8")
-    implementation("org.jetbrains.anko:anko-design:0.10.8")
+    val ankoVersion = "0.10.8"
+    implementation("org.jetbrains.anko:anko-commons:$ankoVersion")
+    implementation("org.jetbrains.anko:anko-design:$ankoVersion")
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.6.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.6.0")
+    val retrofitVersion = "2.6.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
     // Room
     val roomVersion = "2.1.0"
