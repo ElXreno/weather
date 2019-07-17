@@ -3,8 +3,8 @@ package com.elxreno.weather.presenters
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.elxreno.weather.BuildConfig
-import com.elxreno.weather.dto.weather.WeatherForecastDto
-import com.elxreno.weather.dto.weather.WeatherTodayDto
+import com.elxreno.weather.dto.WeatherCurrentDto
+import com.elxreno.weather.dto.WeatherForecastDto
 import com.elxreno.weather.services.WeatherService
 import com.elxreno.weather.views.MainView
 import retrofit2.Call
@@ -26,17 +26,17 @@ class MainPresenter : MvpPresenter<MainView>() {
         WeatherService().getInstance()
             .getWeatherApi()
             .getWeatherTodayById(cityId, authToken)
-            .enqueue(object : Callback<WeatherTodayDto> {
-                override fun onFailure(call: Call<WeatherTodayDto>, t: Throwable) {
+            .enqueue(object : Callback<WeatherCurrentDto> {
+                override fun onFailure(call: Call<WeatherCurrentDto>, t: Throwable) {
                     viewState.showTodayWeather(t.message!!)
                 }
 
-                override fun onResponse(call: Call<WeatherTodayDto>, response: Response<WeatherTodayDto>) {
+                override fun onResponse(call: Call<WeatherCurrentDto>, response: Response<WeatherCurrentDto>) {
                     if (response.code() == 200) {
-                        val weatherToday = response.body()
+                        val weatherCurrent = response.body()
 
-                        val result = "City: ${weatherToday?.city}\n" +
-                                "Temperature: ${weatherToday?.main?.temp} °C\n"
+                        val result = "City: ${weatherCurrent?.cityName}\n" +
+                                "Temperature: ${weatherCurrent?.main?.temp} °C\n"
 
                         viewState.showTodayWeather(result)
                     }
