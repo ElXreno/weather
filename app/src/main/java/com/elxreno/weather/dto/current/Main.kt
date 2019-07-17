@@ -4,8 +4,8 @@ package com.elxreno.weather.dto.current
 import com.google.gson.annotations.SerializedName
 
 data class Main(
-    val humidity: Int,
-    val pressure: Int,
+    val humidity: Double,
+    val pressure: Double,
     val temp: Double,
     @SerializedName("temp_max")
     val tempMax: Double,

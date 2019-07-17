@@ -1,4 +1,4 @@
-package com.elxreno.weather.views
+package com.elxreno.weather.mvp.views
 
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy

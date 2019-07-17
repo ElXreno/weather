@@ -1,12 +1,12 @@
-package com.elxreno.weather.activities
+package com.elxreno.weather.ui.activities
 
 import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.elxreno.weather.R
-import com.elxreno.weather.adapters.PagerAdapter
-import com.elxreno.weather.presenters.MainPresenter
-import com.elxreno.weather.views.MainView
+import com.elxreno.weather.ui.adapters.PagerAdapter
+import com.elxreno.weather.mvp.presenters.MainPresenter
+import com.elxreno.weather.mvp.views.MainView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_forecast.*
 import kotlinx.android.synthetic.main.fragment_today.*
@@ -23,8 +23,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         val adapter = PagerAdapter(this, supportFragmentManager)
         view_pager.adapter = adapter
         tabs.setupWithViewPager(view_pager)
-
-        presenter.onCreateSuccess()
     }
 
     override fun showTodayWeather(text: String) {

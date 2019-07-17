@@ -1,4 +1,4 @@
 package com.elxreno.weather.dto.current
 
 
-data class Wind(val speed: Int)
+data class Wind(val speed: Double)

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class Main(
     @SerializedName("grnd_level")
     val grndLevel: Double,
-    val humidity: Int,
+    val humidity: Double,
     val pressure: Double,
     @SerializedName("sea_level")
     val seaLevel: Double,

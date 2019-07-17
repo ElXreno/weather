@@ -10,12 +10,6 @@ plugins {
     kotlin("kapt")
 }
 
-kotlin {
-    experimental {
-        coroutines = Coroutines.ENABLE
-    }
-}
-
 android {
     compileSdkVersion(29)
     buildToolsVersion("29.0.1")
@@ -83,4 +77,12 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     testImplementation("androidx.room:room-testing:$roomVersion")
+
+    // Dagger
+    val daggerVersion = "2.23.2"
+    implementation("com.google.dagger:dagger:$daggerVersion")
+    implementation("com.google.dagger:dagger-android:$daggerVersion")
+    implementation("com.google.dagger:dagger-android-support:$daggerVersion")
+    kapt("com.google.dagger:dagger-compiler:$daggerVersion")
+    kapt("com.google.dagger:dagger-android-processor:$daggerVersion")
 }
