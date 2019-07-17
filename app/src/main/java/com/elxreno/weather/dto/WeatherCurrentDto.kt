@@ -2,12 +2,11 @@ package com.elxreno.weather.dto
 
 
 import com.elxreno.weather.dto.current.*
-import com.elxreno.weather.dto.weather.current.*
 import com.google.gson.annotations.SerializedName
 
 data class WeatherCurrentDto(
     @SerializedName("coord")
-    val coordinates: Coord,
+    val coordinates: Coordinates,
     val weather: List<Weather>,
     val base: String,
     val main: Main,
