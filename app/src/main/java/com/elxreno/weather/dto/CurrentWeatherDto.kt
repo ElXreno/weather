@@ -4,7 +4,7 @@ package com.elxreno.weather.dto
 import com.elxreno.weather.dto.current.*
 import com.google.gson.annotations.SerializedName
 
-data class WeatherCurrentDto(
+data class CurrentWeatherDto(
     @SerializedName("coord")
     val coordinates: Coordinates,
     val weather: List<Weather>,

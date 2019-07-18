@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
-import org.jetbrains.kotlin.gradle.dsl.Coroutines
 
 val openWeatherMapKey: String by project
 
@@ -37,10 +36,7 @@ android {
 
 dependencies {
     // Kotlin stuff
-    val coroutinesVersion = "1.3.0-M2"
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${KotlinCompilerVersion.VERSION}")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
 
     // AndroidX stuff
     implementation("androidx.appcompat:appcompat:1.0.2")
@@ -71,6 +67,10 @@ dependencies {
     val retrofitVersion = "2.6.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
+
+    // OkHttp logging
+    implementation("com.squareup.okhttp3:logging-interceptor:4.0.1")
 
     // Room
     val roomVersion = "2.1.0"
@@ -85,4 +85,8 @@ dependencies {
     implementation("com.google.dagger:dagger-android-support:$daggerVersion")
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
     kapt("com.google.dagger:dagger-android-processor:$daggerVersion")
+
+    // RxJava
+    implementation("io.reactivex.rxjava2:rxjava:2.2.10")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 }

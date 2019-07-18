@@ -1,18 +1,19 @@
 package com.elxreno.weather.api
 
-import com.elxreno.weather.dto.WeatherCurrentDto
+import com.elxreno.weather.dto.CurrentWeatherDto
 import com.elxreno.weather.dto.WeatherForecastDto
-import retrofit2.Call
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface WeatherApi {
+interface  WeatherApi {
+
     @GET("weather")
     fun getWeatherTodayById(
         @Query("id") id: Int,
         @Query("appid") token: String,
         @Query("units") units: String = "metric"
-    ): Call<WeatherCurrentDto>
+    ): Observable<CurrentWeatherDto>
 
     @GET("weather")
     fun getWeatherTodayByCoordinates(
@@ -20,14 +21,14 @@ interface WeatherApi {
         @Query("lon") lon: Double,
         @Query("appid") token: String,
         @Query("units") units: String = "metric"
-    ): Call<WeatherCurrentDto>
+    ): Observable<CurrentWeatherDto>
 
     @GET("forecast")
     fun getWeatherForecastById(
         @Query("id") id: Int,
         @Query("appid") token: String,
         @Query("units") units: String = "metric"
-    ): Call<WeatherForecastDto>
+    ): Observable<WeatherForecastDto>
 
     @GET("forecast")
     fun getWeatherForecastByCoordinates(
@@ -35,5 +36,5 @@ interface WeatherApi {
         @Query("lon") lon: Double,
         @Query("appid") token: String,
         @Query("units") units: String = "metric"
-    ): Call<WeatherForecastDto>
+    ): Observable<WeatherForecastDto>
 }

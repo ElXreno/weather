@@ -6,14 +6,14 @@ import com.arellomobile.mvp.MvpPresenter
 import com.elxreno.weather.App
 import com.elxreno.weather.BuildConfig
 import com.elxreno.weather.api.WeatherApi
-import com.elxreno.weather.databases.WeatherDatabase
-import com.elxreno.weather.databases.models.CurrentWeatherModel
-import com.elxreno.weather.dto.WeatherCurrentDto
+import com.elxreno.weather.dao.CurrentWeatherDao
+import com.elxreno.weather.dto.CurrentWeatherDto
 import com.elxreno.weather.dto.WeatherForecastDto
 import com.elxreno.weather.mvp.views.MainView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableObserver
+import io.reactivex.schedulers.Schedulers
 import java.text.DateFormat
 import java.util.*
 import javax.inject.Inject
@@ -25,7 +25,9 @@ class MainPresenter : MvpPresenter<MainView>() {
     @Inject
     lateinit var weatherApi: WeatherApi
     @Inject
-    lateinit var weatherDatabase: WeatherDatabase
+    lateinit var currentWeatherDao: CurrentWeatherDao
+
+    private val compositeDisposable = CompositeDisposable()
 
     init {
         App.applicationComponent.inject(this)
@@ -37,72 +39,70 @@ class MainPresenter : MvpPresenter<MainView>() {
         val cityId = 620127
         val authToken = BuildConfig.openWeatherMapKey
 
-        val currentWeather = weatherDatabase.currentWeatherDao().getOne()
-
-        if (currentWeather != null) {
-            Log.w("DEBUG", currentWeather.toString())
-            viewState.showTodayWeather(
-                "City: ${currentWeather.city}\n" +
-                        "Temperature: ${currentWeather.temp} °C"
-            )
-        }
-
-        weatherApi
+        val currentWeatherDisposableObserver = weatherApi
             .getWeatherTodayById(cityId, authToken)
-            .enqueue(object : Callback<WeatherCurrentDto> {
-                override fun onFailure(call: Call<WeatherCurrentDto>, t: Throwable) {
-                    viewState.showTodayWeather(t.message!!)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object : DisposableObserver<CurrentWeatherDto>() {
+                override fun onComplete() {
+                    Log.w("onComplete", "DONE!")
                 }
 
-                override fun onResponse(call: Call<WeatherCurrentDto>, response: Response<WeatherCurrentDto>) {
-                    if (response.code() == 200) {
-                        val weatherCurrent = response.body()
+                override fun onNext(currentWeatherDto: CurrentWeatherDto) {
+                    Log.w("onNext", currentWeatherDto.toString())
 
-                        val result = "City: ${weatherCurrent?.cityName}\n" +
-                                "Temperature: ${weatherCurrent?.main?.temp} °C"
+                    val result = "City: ${currentWeatherDto.cityName}\n" +
+                            "Temperature: ${currentWeatherDto.main.temp} °C"
 
-                        viewState.showTodayWeather(result)
+                    viewState.showTodayWeather(result)
+                }
 
-                        weatherCurrent?.let {
-                            val currentWeatherModel = CurrentWeatherModel(1, it.cityName, it.main.temp)
-                            weatherDatabase.currentWeatherDao().insert(currentWeatherModel)
-
-                        }
-                    }
+                override fun onError(e: Throwable) {
+                    Log.w("onError", e)
                 }
 
             })
 
+        compositeDisposable.addAll(currentWeatherDisposableObserver)
 
-        weatherApi
+        val forecastWeatherDisposableObserver = weatherApi
             .getWeatherForecastById(cityId, authToken)
-            .enqueue(object : Callback<WeatherForecastDto> {
-                override fun onFailure(call: Call<WeatherForecastDto>, t: Throwable) {
-                    viewState.showForecastWeather(t.message!!)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object: DisposableObserver<WeatherForecastDto>() {
+                override fun onComplete() {
+                    Log.w("onComplete", "DONE!")
                 }
 
-                override fun onResponse(call: Call<WeatherForecastDto>, response: Response<WeatherForecastDto>) {
-                    if (response.code() == 200) {
-                        val weatherForecast = response.body()
+                override fun onNext(weatherForecastDto: WeatherForecastDto) {
+                    Log.w("onNext", weatherForecastDto.toString())
 
-                        var result = ""
+                    var result = ""
 
-                        weatherForecast?.list?.forEach {
-                            val date = getDate(it.timestamp)
+                    weatherForecastDto.list.forEach {
+                        val date = getDate(it.timestamp)
 
-                            // TODO: Fix hardcoded strings
-                            result += "\nDate: $date\n" +
-                                    "Minimal temperature: ${it.main.minTemp} °C\n" +
-                                    "Maximum temperature: ${it.main.maxTemp} °C\n" +
-                                    "Wind speed: ${it.wind.speed} m/s\n"
-                        }
-
-                        viewState.showForecastWeather(result)
-
+                        result += "\nDate: $date\n" +
+                                "Minimal temperature: ${it.main.minTemp} °C\n" +
+                                "Maximum temperature: ${it.main.maxTemp} °C\n" +
+                                "Wind speed: ${it.wind.speed} m/s\n"
                     }
+
+                    viewState.showForecastWeather(result)
+                }
+
+                override fun onError(e: Throwable) {
+                    Log.w("onError", e)
                 }
 
             })
+
+        compositeDisposable.addAll(forecastWeatherDisposableObserver)
+    }
+
+    override fun destroyView(view: MainView?) {
+        compositeDisposable.dispose()
+        super.destroyView(view)
     }
 
     fun getDate(timeStamp: Long): String {
