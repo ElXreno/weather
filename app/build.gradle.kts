@@ -70,11 +70,12 @@ dependencies {
     implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
 
     // OkHttp logging
-    implementation("com.squareup.okhttp3:logging-interceptor:4.0.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:3.4.1")
 
     // Room
     val roomVersion = "2.1.0"
     implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-rxjava2:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     testImplementation("androidx.room:room-testing:$roomVersion")
 
