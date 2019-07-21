@@ -1,4 +1,4 @@
-package com.elxreno.weather.api
+package com.elxreno.weather.data.api
 
 import com.elxreno.weather.dto.CurrentWeatherDto
 import com.elxreno.weather.dto.WeatherForecastDto
@@ -11,7 +11,6 @@ interface  WeatherApi {
     @GET("weather")
     fun getWeatherTodayById(
         @Query("id") id: Int,
-        @Query("appid") token: String,
         @Query("units") units: String = "metric"
     ): Observable<CurrentWeatherDto>
 
@@ -19,14 +18,12 @@ interface  WeatherApi {
     fun getWeatherTodayByCoordinates(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
-        @Query("appid") token: String,
         @Query("units") units: String = "metric"
     ): Observable<CurrentWeatherDto>
 
     @GET("forecast")
     fun getWeatherForecastById(
         @Query("id") id: Int,
-        @Query("appid") token: String,
         @Query("units") units: String = "metric"
     ): Observable<WeatherForecastDto>
 
@@ -34,7 +31,6 @@ interface  WeatherApi {
     fun getWeatherForecastByCoordinates(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
-        @Query("appid") token: String,
         @Query("units") units: String = "metric"
     ): Observable<WeatherForecastDto>
 }

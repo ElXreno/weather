@@ -1,6 +1,6 @@
 package com.elxreno.weather.di.modules
 
-import com.elxreno.weather.api.WeatherApi
+import com.elxreno.weather.data.api.WeatherApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

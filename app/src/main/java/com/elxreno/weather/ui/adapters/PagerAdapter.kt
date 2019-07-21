@@ -6,12 +6,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.elxreno.weather.R
 import com.elxreno.weather.ui.fragments.ForecastFragment
-import com.elxreno.weather.ui.fragments.TodayFragment
+import com.elxreno.weather.ui.fragments.CurrentFragment
 
 class PagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment? = when (position) {
-        0 -> TodayFragment.newInstance()
+        0 -> CurrentFragment.newInstance()
         1 -> ForecastFragment.newInstance()
         else -> null
     }
