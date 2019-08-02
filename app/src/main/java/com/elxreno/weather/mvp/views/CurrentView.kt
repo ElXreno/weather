@@ -5,6 +5,6 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface TodayView : MvpView{
+interface CurrentView : MvpView {
     fun showTodayWeather(text: String)
 }

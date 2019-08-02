@@ -19,6 +19,7 @@ import javax.inject.Singleton
 
 @Module
 class NetworkingModule {
+
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()
 
@@ -32,21 +33,25 @@ class NetworkingModule {
                 .addQueryParameter("appid", BuildConfig.openWeatherMapKey)
                 .build()
 
-            val request = if ((context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
-                    .activeNetworkInfo?.isConnected == true
-            ) {
-                chain.request()
-                    .newBuilder()
-                    .url(url)
-                    .header("Cache-Control", "public, max-age=" + 5)
-                    .build()
-            } else {
-                chain.request()
-                    .newBuilder()
-                    .url(url)
-                    .header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7)
-                    .build()
-            }
+            val request =
+                if ((context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
+                        .activeNetworkInfo?.isConnected == true
+                ) {
+                    chain.request()
+                        .newBuilder()
+                        .url(url)
+                        .header("Cache-Control", "public, max-age=" + 5)
+                        .build()
+                } else {
+                    chain.request()
+                        .newBuilder()
+                        .url(url)
+                        .header(
+                            "Cache-Control",
+                            "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7
+                        )
+                        .build()
+                }
 
             return@Interceptor chain.proceed(request)
         }

@@ -1,24 +1,17 @@
 package com.elxreno.weather.mvp.presenters
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.elxreno.weather.App
-import com.elxreno.weather.AppConstants
-import com.elxreno.weather.data.api.WeatherApi
 import com.elxreno.weather.data.dao.ForecastWeatherDao
-import com.elxreno.weather.data.dto.ForecastWeatherDto
 import com.elxreno.weather.mvp.views.ForecastView
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
 import java.text.DateFormat
 import java.util.*
 import javax.inject.Inject
 
 @InjectViewState
 class ForecastPresenter : MvpPresenter<ForecastView>() {
-    @Inject
-    lateinit var weatherApi: WeatherApi
+
     @Inject
     lateinit var forecastWeatherDao: ForecastWeatherDao
 
@@ -45,25 +38,6 @@ class ForecastPresenter : MvpPresenter<ForecastView>() {
                 viewState.showForecastWeather(result)
             }
         }
-
-        weatherApi
-            .getWeatherForecastById(AppConstants.CITY_ID)
-            .subscribeOn(Schedulers.io())
-            .subscribe(object : DisposableObserver<ForecastWeatherDto>() {
-                override fun onComplete() {
-                    Log.w("onComplete", "DONE!")
-                }
-
-                override fun onNext(forecastWeatherDto: ForecastWeatherDto) {
-                    Log.w("onNext", forecastWeatherDto.toString())
-                    forecastWeatherDao.upsert(forecastWeatherDto)
-                }
-
-                override fun onError(e: Throwable) {
-                    Log.w("onError", e)
-                }
-
-            })
     }
 
     private fun getDate(timeStamp: Long): String {

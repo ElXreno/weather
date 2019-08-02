@@ -12,10 +12,15 @@ import com.elxreno.weather.mvp.views.ForecastView
 import kotlinx.android.synthetic.main.fragment_forecast.*
 
 class ForecastFragment : MvpAppCompatFragment(), ForecastView {
+
     @InjectPresenter
     lateinit var presenter: ForecastPresenter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_forecast, container, false)
     }
 

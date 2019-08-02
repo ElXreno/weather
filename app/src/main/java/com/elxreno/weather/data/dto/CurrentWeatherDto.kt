@@ -25,7 +25,7 @@ data class CurrentWeatherDto(
     val timezone: Int,
     @SerializedName("name") val cityName: String,
     val cod: Int
-){
+) {
     @PrimaryKey(autoGenerate = false)
     var _id: Int = CURRENT_WEATHER_ID
 }

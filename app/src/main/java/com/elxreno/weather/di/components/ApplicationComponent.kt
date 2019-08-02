@@ -5,8 +5,9 @@ import com.elxreno.weather.data.api.WeatherApi
 import com.elxreno.weather.data.db.converters.ItemListConverter
 import com.elxreno.weather.data.db.converters.WeatherListConverter
 import com.elxreno.weather.di.modules.*
+import com.elxreno.weather.mvp.presenters.CurrentPresenter
 import com.elxreno.weather.mvp.presenters.ForecastPresenter
-import com.elxreno.weather.mvp.presenters.TodayPresenter
+import com.elxreno.weather.mvp.presenters.MainPresenter
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,8 +18,9 @@ interface ApplicationComponent {
     fun getWeatherApi(): WeatherApi
     fun getContext(): Context
 
+    fun inject(mainPresenter: MainPresenter)
     fun inject(forecastPresenter: ForecastPresenter)
-    fun inject(todayPresenter: TodayPresenter)
+    fun inject(currentPresenter: CurrentPresenter)
     fun inject(weatherListConverter: WeatherListConverter)
     fun inject(itemListConverter: ItemListConverter)
 

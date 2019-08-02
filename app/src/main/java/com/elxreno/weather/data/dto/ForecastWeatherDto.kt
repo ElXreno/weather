@@ -17,7 +17,7 @@ data class ForecastWeatherDto(
     val city: City,
     val cnt: Int,
     val list: List<Item>
-){
+) {
     @PrimaryKey(autoGenerate = false)
     var _id: Int = FORECAST_WEATHER_ID
 }

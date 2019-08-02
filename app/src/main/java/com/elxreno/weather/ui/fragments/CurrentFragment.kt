@@ -7,15 +7,20 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.elxreno.weather.R
-import com.elxreno.weather.mvp.presenters.TodayPresenter
-import com.elxreno.weather.mvp.views.TodayView
+import com.elxreno.weather.mvp.presenters.CurrentPresenter
+import com.elxreno.weather.mvp.views.CurrentView
 import kotlinx.android.synthetic.main.fragment_current.*
 
-class CurrentFragment : MvpAppCompatFragment(), TodayView {
-    @InjectPresenter
-    lateinit var presenter: TodayPresenter
+class CurrentFragment : MvpAppCompatFragment(), CurrentView {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    @InjectPresenter
+    lateinit var presenter: CurrentPresenter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_current, container, false)
     }
 
