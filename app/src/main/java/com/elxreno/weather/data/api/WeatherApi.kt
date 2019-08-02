@@ -1,7 +1,7 @@
 package com.elxreno.weather.data.api
 
 import com.elxreno.weather.data.dto.CurrentWeatherDto
-import com.elxreno.weather.data.dto.WeatherForecastDto
+import com.elxreno.weather.data.dto.ForecastWeatherDto
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -25,12 +25,12 @@ interface  WeatherApi {
     fun getWeatherForecastById(
         @Query("id") id: Int,
         @Query("units") units: String = "metric"
-    ): Observable<WeatherForecastDto>
+    ): Observable<ForecastWeatherDto>
 
     @GET("forecast")
     fun getWeatherForecastByCoordinates(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
         @Query("units") units: String = "metric"
-    ): Observable<WeatherForecastDto>
+    ): Observable<ForecastWeatherDto>
 }

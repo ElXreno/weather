@@ -2,6 +2,8 @@ package com.elxreno.weather.di.components
 
 import android.content.Context
 import com.elxreno.weather.data.api.WeatherApi
+import com.elxreno.weather.data.db.converters.ItemListConverter
+import com.elxreno.weather.data.db.converters.WeatherListConverter
 import com.elxreno.weather.di.modules.*
 import com.elxreno.weather.mvp.presenters.ForecastPresenter
 import com.elxreno.weather.mvp.presenters.TodayPresenter
@@ -17,5 +19,7 @@ interface ApplicationComponent {
 
     fun inject(forecastPresenter: ForecastPresenter)
     fun inject(todayPresenter: TodayPresenter)
+    fun inject(weatherListConverter: WeatherListConverter)
+    fun inject(itemListConverter: ItemListConverter)
 
 }

@@ -6,8 +6,8 @@ import com.arellomobile.mvp.MvpPresenter
 import com.elxreno.weather.App
 import com.elxreno.weather.AppConstants
 import com.elxreno.weather.data.api.WeatherApi
-import com.elxreno.weather.data.dao.CurrentWeatherDao
-import com.elxreno.weather.data.dto.WeatherForecastDto
+import com.elxreno.weather.data.dao.ForecastWeatherDao
+import com.elxreno.weather.data.dto.ForecastWeatherDto
 import com.elxreno.weather.mvp.views.ForecastView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
@@ -21,7 +21,7 @@ class ForecastPresenter : MvpPresenter<ForecastView>() {
     @Inject
     lateinit var weatherApi: WeatherApi
     @Inject
-    lateinit var currentWeatherDao: CurrentWeatherDao
+    lateinit var forecastWeatherDao: ForecastWeatherDao
 
     init {
         App.applicationComponent.inject(this)
@@ -30,30 +30,34 @@ class ForecastPresenter : MvpPresenter<ForecastView>() {
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
+        forecastWeatherDao.getLast().observeForever { response ->
+            response?.let {
+                var result = ""
+
+                it.list.forEach { item ->
+                    val date = getDate(item.timestamp)
+
+                    result += "\nDate: $date\n" +
+                            "Minimal temperature: ${item.main.minTemp} °C\n" +
+                            "Maximum temperature: ${item.main.maxTemp} °C\n" +
+                            "Wind speed: ${item.wind.speed} m/s\n"
+                }
+
+                viewState.showForecastWeather(result)
+            }
+        }
+
         weatherApi
             .getWeatherForecastById(AppConstants.CITY_ID)
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : DisposableObserver<WeatherForecastDto>() {
+            .subscribe(object : DisposableObserver<ForecastWeatherDto>() {
                 override fun onComplete() {
                     Log.w("onComplete", "DONE!")
                 }
 
-                override fun onNext(weatherForecastDto: WeatherForecastDto) {
-                    Log.w("onNext", weatherForecastDto.toString())
-
-                    var result = ""
-
-                    weatherForecastDto.list.forEach {
-                        val date = getDate(it.timestamp)
-
-                        result += "\nDate: $date\n" +
-                                "Minimal temperature: ${it.main.minTemp} °C\n" +
-                                "Maximum temperature: ${it.main.maxTemp} °C\n" +
-                                "Wind speed: ${it.wind.speed} m/s\n"
-                    }
-
-                    viewState.showForecastWeather(result)
+                override fun onNext(forecastWeatherDto: ForecastWeatherDto) {
+                    Log.w("onNext", forecastWeatherDto.toString())
+                    forecastWeatherDao.upsert(forecastWeatherDto)
                 }
 
                 override fun onError(e: Throwable) {
@@ -63,8 +67,9 @@ class ForecastPresenter : MvpPresenter<ForecastView>() {
             })
     }
 
-    fun getDate(timeStamp: Long): String {
-        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(Date(timeStamp * 1000L))
+    private fun getDate(timeStamp: Long): String {
+        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
+            .format(Date(timeStamp * 1000L))
     }
 
 }

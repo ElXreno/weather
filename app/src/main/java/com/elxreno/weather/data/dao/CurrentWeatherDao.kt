@@ -5,14 +5,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.elxreno.weather.data.db.entities.CURRENT_WEATHER_ID
-import com.elxreno.weather.data.db.entities.CurrentWeatherEntity
+import com.elxreno.weather.data.dto.CURRENT_WEATHER_ID
+import com.elxreno.weather.data.dto.CurrentWeatherDto
 
 @Dao
 interface CurrentWeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsert(currentWeather: CurrentWeatherEntity)
+    fun upsert(currentWeather: CurrentWeatherDto)
 
-    @Query("SELECT * FROM current_weather WHERE id = $CURRENT_WEATHER_ID")
-    fun getLast(): LiveData<CurrentWeatherEntity?>
+    @Query("SELECT * FROM current_weather WHERE _id = $CURRENT_WEATHER_ID")
+    fun getLast(): LiveData<CurrentWeatherDto?>
 }
