@@ -58,7 +58,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko-design:$ankoVersion"
 
     // Retrofit
-    ext.retrofitVersion = "2.6.0"
+    ext.retrofitVersion = '2.6.1'
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
@@ -74,7 +74,7 @@ dependencies {
     testImplementation "androidx.room:room-testing:$roomVersion"
 
     // Dagger
-    ext.daggerVersion = "2.23.2"
+    ext.daggerVersion = '2.24'
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
