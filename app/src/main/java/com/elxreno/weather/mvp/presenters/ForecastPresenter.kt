@@ -9,7 +9,6 @@ import com.elxreno.weather.data.api.WeatherApi
 import com.elxreno.weather.data.dao.ForecastWeatherDao
 import com.elxreno.weather.data.dto.ForecastWeatherDto
 import com.elxreno.weather.mvp.views.ForecastView
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import java.text.DateFormat

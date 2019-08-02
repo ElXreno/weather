@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.elxreno.weather.R
-import com.elxreno.weather.ui.fragments.ForecastFragment
 import com.elxreno.weather.ui.fragments.CurrentFragment
+import com.elxreno.weather.ui.fragments.ForecastFragment
 
 class PagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
