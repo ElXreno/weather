@@ -16,7 +16,7 @@ data class CurrentWeatherDto(
     val base: String,
     @Embedded(prefix = "main_") val main: Main,
     val visibility: Int,
-    @Embedded(prefix = "main_") val wind: Wind,
+    @Embedded(prefix = "wind_") val wind: Wind,
     @Embedded(prefix = "clouds_") val clouds: Clouds,
     @Embedded(prefix = "rain_") val rain: Rain?,
     @Embedded(prefix = "snow_") val snow: Snow?,
