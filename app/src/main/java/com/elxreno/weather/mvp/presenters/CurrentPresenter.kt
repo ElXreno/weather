@@ -23,6 +23,13 @@ class CurrentPresenter : MvpPresenter<CurrentView>() {
         currentWeatherDao.getLast().observeForever { response ->
             response?.let {
                 val result = "City: ${it.cityName}\n" +
+                        "Clouds: ${it.clouds.all}%\n" +
+                        "Humidity: ${it.main.humidity}%\n" +
+                        "Pressure: ${it.main.pressure} hPa\n" +
+                        "Rain 1h: ${it.rain?.h1} mm\n" +
+                        "Rain 3h: ${it.rain?.h3} mm\n" +
+                        "Snow 1h: ${it.snow?.h1} mm\n" +
+                        "Snow 3h: ${it.snow?.h3} mm\n" +
                         "Temperature: ${it.main.temp} °C\n" +
                         "Wind speed: ${it.wind.speed} m/s"
 
