@@ -15,4 +15,7 @@ interface ForecastWeatherDao {
 
     @Query("SELECT * FROM forecast_weather WHERE _id = $FORECAST_WEATHER_ID")
     fun getLast(): LiveData<ForecastWeatherDto?>
+
+    @Query("DELETE FROM forecast_weather")
+    fun clearAll()
 }
