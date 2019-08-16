@@ -3,10 +3,9 @@ package com.elxreno.weather.mvp.presenters
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.elxreno.weather.App
+import com.elxreno.weather.Utils
 import com.elxreno.weather.data.dao.ForecastWeatherDao
 import com.elxreno.weather.mvp.views.ForecastView
-import java.text.DateFormat
-import java.util.*
 import javax.inject.Inject
 
 @InjectViewState
@@ -27,7 +26,7 @@ class ForecastPresenter : MvpPresenter<ForecastView>() {
                 var result = ""
 
                 it.list.forEach { item ->
-                    val date = getDate(item.timestamp)
+                    val date = Utils().getDateFromTimestamp(item.timestamp)
 
                     result += "\nDate: $date\n" +
                             "Minimal temperature: ${item.main.minTemp} °C\n" +
@@ -37,17 +36,12 @@ class ForecastPresenter : MvpPresenter<ForecastView>() {
                             "Humidity: ${item.main.humidity}%\n" +
                             "Rain: ${item.rain?.h3} mm\n" +
                             "Snow: ${item.snow?.h3} mm\n" +
-                            "Wind speed: ${item.wind.speed} m/s\n"
+                            "Wind speed: ${item.wind.speed} m/s\n" +
+                            "Last update: $date\n"
                 }
 
                 viewState.showForecastWeather(result)
             }
         }
     }
-
-    private fun getDate(timeStamp: Long): String {
-        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
-            .format(Date(timeStamp * 1000L))
-    }
-
 }
