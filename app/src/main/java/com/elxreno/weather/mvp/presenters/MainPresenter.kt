@@ -101,6 +101,7 @@ class MainPresenter : MvpPresenter<MainView>() {
 
                     override fun onNext(forecastWeatherDto: ForecastWeatherDto) {
                         Log.w("onNext", forecastWeatherDto.toString())
+                        forecastWeatherDao.clearAll()
                         forecastWeatherDao.upsert(forecastWeatherDto)
                     }
 
