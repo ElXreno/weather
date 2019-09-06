@@ -28,7 +28,7 @@ class NetworkingModule {
         Interceptor { chain ->
 
             val url = chain.request()
-                .url()
+                .url
                 .newBuilder()
                 .addQueryParameter("appid", BuildConfig.openWeatherMapKey)
                 .build()
@@ -61,12 +61,15 @@ class NetworkingModule {
         Cache(context.cacheDir, 10 * 1024 * 1024)
 
     @Provides
-    fun provideOkHttpClient(interceptor: Interceptor, cache: Cache): OkHttpClient =
-        OkHttpClient.Builder()
+    fun provideOkHttpClient(interceptor: Interceptor, cache: Cache): OkHttpClient {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        return OkHttpClient.Builder()
             .cache(cache)
             .addInterceptor(interceptor)
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(httpLoggingInterceptor)
             .build()
+    }
 
     @Provides
     @Singleton
