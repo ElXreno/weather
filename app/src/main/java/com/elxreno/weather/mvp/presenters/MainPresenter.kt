@@ -52,7 +52,7 @@ class MainPresenter : MvpPresenter<MainView>() {
                 }
 
                 else -> {
-                    // Nothing
+                    viewState.showToast(R.string.something_went_wrong)
                 }
             }
         }
