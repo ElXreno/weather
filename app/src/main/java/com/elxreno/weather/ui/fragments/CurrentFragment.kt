@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.elxreno.weather.R
 import com.elxreno.weather.mvp.presenters.CurrentPresenter
 import com.elxreno.weather.mvp.views.CurrentView
@@ -31,5 +33,13 @@ class CurrentFragment : MvpAppCompatFragment(), CurrentView {
 
     override fun showTodayWeather(text: String) {
         todayWeather.text = text
+    }
+
+    override fun updateIcon(url: String) {
+        Glide
+            .with(this)
+            .load(url)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(currentWeatherIcon)
     }
 }

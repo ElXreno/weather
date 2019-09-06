@@ -4,6 +4,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.elxreno.weather.R
@@ -13,19 +14,11 @@ import com.elxreno.weather.ui.adapters.PagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 
-class MainActivity : MvpAppCompatActivity(), MainView {
-
+class MainActivity : MvpAppCompatActivity(), MainView, SwipeRefreshLayout.OnRefreshListener {
     @InjectPresenter
     lateinit var presenter: MainPresenter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val adapter = PagerAdapter(this, supportFragmentManager)
-        view_pager.adapter = adapter
-        tabs.setupWithViewPager(view_pager)
-
+    override fun onRefresh() {
         if (ContextCompat.checkSelfPermission(
                 this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -41,6 +34,17 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val adapter = PagerAdapter(this, supportFragmentManager)
+        view_pager.adapter = adapter
+        tabs.setupWithViewPager(view_pager)
+
+        swipeToRefresh.setOnRefreshListener(this)
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -52,5 +56,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun showToast(text: Int) {
         toast(text)
+    }
+
+    override fun setRefreshing(isRefreshing: Boolean) {
+        swipeToRefresh.isRefreshing = isRefreshing
     }
 }

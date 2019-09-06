@@ -7,4 +7,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface CurrentView : MvpView {
     fun showTodayWeather(text: String)
+    fun updateIcon(url: String)
 }

@@ -97,6 +97,7 @@ class MainPresenter : MvpPresenter<MainView>() {
                     override fun onNext(response: CurrentWeatherDto) {
                         Log.w("onNext", response.toString())
                         currentWeatherDao.upsert(response)
+                        viewState.setRefreshing(false)
                     }
 
                     override fun onError(e: Throwable) {
@@ -117,6 +118,7 @@ class MainPresenter : MvpPresenter<MainView>() {
                         Log.w("onNext", forecastWeatherDto.toString())
                         forecastWeatherDao.clearAll()
                         forecastWeatherDao.upsert(forecastWeatherDto)
+                        viewState.setRefreshing(false)
                     }
 
                     override fun onError(e: Throwable) {
