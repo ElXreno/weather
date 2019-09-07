@@ -20,7 +20,7 @@ jobs:
     - name: Build with Gradle
       env:
         OPENWEATHERMAP_KEY: ${{ secrets.OPENWEATHERMAP_KEY }}
-      run: ./gradlew buildDebug
+      run: ./gradlew assembleDebug
     - uses: actions/upload-artifact@master
       with:
         name: apks-artifacts
