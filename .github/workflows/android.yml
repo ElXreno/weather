@@ -13,10 +13,9 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Setup super secret environment variables
-      env:
-        OPENWEATHERMAP_KEY: ${{ secrets.OPENWEATHERMAP_KEY }}
     - name: Make gradlew executable
       run: chmod a+x gradlew
     - name: Build with Gradle
+      env:
+        OPENWEATHERMAP_KEY: ${{ secrets.OPENWEATHERMAP_KEY }}
       run: ./gradlew build
