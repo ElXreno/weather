@@ -4,13 +4,24 @@ apply plugin: "kotlin-android-extensions"
 apply plugin: "kotlin-kapt"
 
 android {
+	def isRunningOnTravis = System.getenv("CI") == "true"
+
     signingConfigs {
-        defaultSign {
-            storeFile file(WEATHER_KEYPATH)
-            storePassword WEATHER_PASSWORD
-            keyAlias = WEATHER_ALIAS
-            keyPassword WEATHER_PASSWORD
-        }
+		if (isRunningOnTravis) {
+			defaultSign {
+				storeFile = file("../weather.jks")
+				storePassword = System.getenv("keystore_password")
+				keyAlias = System.getenv("keystore_alias")
+				keyPassword = System.getenv("keystore_alias_password")
+			}
+		} else {
+			defaultSign {
+				storeFile file(WEATHER_KEYPATH)
+				storePassword WEATHER_PASSWORD
+				keyAlias = WEATHER_ALIAS
+				keyPassword WEATHER_PASSWORD
+			}
+		}
     }
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
