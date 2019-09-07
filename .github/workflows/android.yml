@@ -23,7 +23,7 @@ jobs:
       - name: Build
         env:
           OPENWEATHERMAP_KEY: ${{ secrets.OPENWEATHERMAP_KEY }}
-        run: ./gradlew assembleDebug lint test
+        run: ./gradlew assembleDebug lint
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@master
@@ -36,9 +36,3 @@ jobs:
         with:
           name: reports
           path: app/build/reports
-
-      - name: Upload test results
-        uses: actions/upload-artifact@master
-        with:
-          name: test-results
-          path: app/build/test-results
