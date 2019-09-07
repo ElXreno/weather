@@ -13,8 +13,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Create SDK folder and make it writable
-      run: sudo mkdir -p /usr/local/lib/android/sdk && sudo chmod -R 777 /usr/local/lib/android
+    - name: Make SDK folder writable
+      run: sudo chmod -R 777 /usr/local/lib/android
     - name: Make gradlew executable
       run: chmod a+x gradlew
     - name: Build with Gradle
