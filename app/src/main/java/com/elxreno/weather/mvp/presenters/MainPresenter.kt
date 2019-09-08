@@ -91,17 +91,16 @@ class MainPresenter : MvpPresenter<MainView>() {
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : DisposableObserver<CurrentWeatherDto>() {
                     override fun onComplete() {
-                        Log.w("onComplete", "DONE!")
                     }
 
                     override fun onNext(response: CurrentWeatherDto) {
-                        Log.w("onNext", response.toString())
                         currentWeatherDao.upsert(response)
                         viewState.setRefreshing(false)
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.w("onError", e)
+                        viewState.showToast(e.localizedMessage.orEmpty(), true)
+                        viewState.setRefreshing(false)
                     }
 
                 })
@@ -111,18 +110,17 @@ class MainPresenter : MvpPresenter<MainView>() {
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : DisposableObserver<ForecastWeatherDto>() {
                     override fun onComplete() {
-                        Log.w("onComplete", "DONE!")
                     }
 
                     override fun onNext(forecastWeatherDto: ForecastWeatherDto) {
-                        Log.w("onNext", forecastWeatherDto.toString())
                         forecastWeatherDao.clearAll()
                         forecastWeatherDao.upsert(forecastWeatherDto)
                         viewState.setRefreshing(false)
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.w("onError", e)
+                        viewState.showToast(e.localizedMessage.orEmpty(), true)
+                        viewState.setRefreshing(false)
                     }
 
                 })

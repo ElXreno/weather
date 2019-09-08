@@ -54,8 +54,12 @@ class MainActivity : MvpAppCompatActivity(), MainView, SwipeRefreshLayout.OnRefr
         presenter.onRequestPermissionsResult(requestCode, grantResults)
     }
 
-    override fun showToast(text: Int) {
-        toast(text)
+    override fun showToast(text: Int, runOnUiThread: Boolean) {
+        if (runOnUiThread) runOnUiThread { toast(text) } else toast(text)
+    }
+
+    override fun showToast(text: String, runOnUiThread: Boolean) {
+        if (runOnUiThread) runOnUiThread { toast(text) } else toast(text)
     }
 
     override fun setRefreshing(isRefreshing: Boolean) {
