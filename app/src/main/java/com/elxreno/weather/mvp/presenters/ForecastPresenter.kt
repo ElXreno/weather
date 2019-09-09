@@ -36,8 +36,7 @@ class ForecastPresenter : MvpPresenter<ForecastView>() {
                             "Humidity: ${item.main.humidity}%\n" +
                             "Rain: ${item.rain?.h3} mm\n" +
                             "Snow: ${item.snow?.h3} mm\n" +
-                            "Wind speed: ${item.wind.speed} m/s\n" +
-                            "Last update: $date\n"
+                            "Wind speed: ${item.wind.speed} m/s\n"
                 }
 
                 viewState.showForecastWeather(result)
