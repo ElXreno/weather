@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager.widget.ViewPager
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.elxreno.weather.R
@@ -15,6 +16,7 @@ import com.elxreno.weather.ui.fragments.CurrentFragment
 import com.elxreno.weather.ui.fragments.ForecastFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
+
 
 class MainActivity : MvpAppCompatActivity(), MainView, SwipeRefreshLayout.OnRefreshListener {
     @InjectPresenter
@@ -45,8 +47,19 @@ class MainActivity : MvpAppCompatActivity(), MainView, SwipeRefreshLayout.OnRefr
         adapter.addFragment(CurrentFragment.newInstance(), getString(R.string.tab_today))
         adapter.addFragment(ForecastFragment.newInstance(), getString(R.string.tab_forecast))
 
-        view_pager.adapter = adapter
-        tabs.setupWithViewPager(view_pager)
+        viewPager.adapter = adapter
+
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, v: Float, i1: Int) {}
+
+            override fun onPageSelected(position: Int) {}
+
+            override fun onPageScrollStateChanged(state: Int) {
+                swipeToRefresh.isEnabled = state == ViewPager.SCROLL_STATE_IDLE
+            }
+        })
+
+        tabs.setupWithViewPager(viewPager)
 
         swipeToRefresh.setOnRefreshListener(this)
     }
