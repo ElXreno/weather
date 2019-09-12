@@ -11,6 +11,8 @@ import com.elxreno.weather.R
 import com.elxreno.weather.mvp.presenters.MainPresenter
 import com.elxreno.weather.mvp.views.MainView
 import com.elxreno.weather.ui.adapters.PagerAdapter
+import com.elxreno.weather.ui.fragments.CurrentFragment
+import com.elxreno.weather.ui.fragments.ForecastFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 
@@ -38,7 +40,11 @@ class MainActivity : MvpAppCompatActivity(), MainView, SwipeRefreshLayout.OnRefr
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val adapter = PagerAdapter(this, supportFragmentManager)
+        val adapter = PagerAdapter(supportFragmentManager)
+
+        adapter.addFragment(CurrentFragment.newInstance(), getString(R.string.tab_today))
+        adapter.addFragment(ForecastFragment.newInstance(), getString(R.string.tab_forecast))
+
         view_pager.adapter = adapter
         tabs.setupWithViewPager(view_pager)
 

@@ -1,26 +1,22 @@
 package com.elxreno.weather.ui.adapters
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.elxreno.weather.R
-import com.elxreno.weather.ui.fragments.CurrentFragment
-import com.elxreno.weather.ui.fragments.ForecastFragment
 
-class PagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment? = when (position) {
-        0 -> CurrentFragment.newInstance()
-        1 -> ForecastFragment.newInstance()
-        else -> null
+class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    private val fragmentList = ArrayList<Fragment>()
+    private val titleList = ArrayList<String>()
+
+    fun addFragment(fragment: Fragment, title: String) {
+        fragmentList.add(fragment)
+        titleList.add(title)
     }
 
-    override fun getPageTitle(position: Int): CharSequence? = when (position) {
-        0 -> context.resources.getString(R.string.tab_today)
-        1 -> context.resources.getString(R.string.tab_forecast)
-        else -> ""
-    }
+    override fun getItem(position: Int): Fragment = fragmentList[position]
 
-    override fun getCount(): Int = 2
+    override fun getPageTitle(position: Int): CharSequence = titleList[position]
+
+    override fun getCount(): Int = fragmentList.size
 }
