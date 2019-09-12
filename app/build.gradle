@@ -4,14 +4,14 @@ apply plugin: "kotlin-android-extensions"
 apply plugin: "kotlin-kapt"
 
 android {
-    //signingConfigs {
-    //    defaultSign {
-    //        storeFile file(WEATHER_KEYPATH)
-    //        storePassword WEATHER_PASSWORD
-    //        keyAlias = WEATHER_ALIAS
-    //        keyPassword WEATHER_PASSWORD
-    //    }
-    //}
+    signingConfigs {
+        defaultSign {
+            storeFile file("../weather.jks")
+            storePassword System.env.WEATHER_PASSWORD ?: WEATHER_PASSWORD
+            keyAlias = System.env.WEATHER_ALIAS ?: WEATHER_ALIAS
+            keyPassword System.env.WEATHER_PASSWORD ?: WEATHER_PASSWORD
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
@@ -29,12 +29,12 @@ android {
             zipAlignEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-            //signingConfig signingConfigs.defaultSign
+            signingConfig signingConfigs.defaultSign
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            //signingConfig signingConfigs.defaultSign
+            signingConfig signingConfigs.defaultSign
         }
     }
     compileOptions {
