@@ -25,7 +25,7 @@ class CurrentPresenter : MvpPresenter<CurrentView>() {
             response?.let {
                 val result = "City: ${it.cityName}\n" +
                         "Country: ${it.sys.country}\n" +
-                        "Description: ${it.weather.first().description}\n" +
+                        "Description: ${it.weather.first().description.capitalize()}\n" +
                         "Temperature: ${it.main.temp} °C\n" +
                         "Wind speed: ${it.wind.speed} m/s\n" +
                         "Clouds: ${it.clouds.all}%\n" +
