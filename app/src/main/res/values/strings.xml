@@ -7,4 +7,5 @@
     <string name="cannot_determine_user_location">Cannot determine user location!</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="pull_down_for_update">Pull down for update</string>
+    <string name="weather_icon">Weather icon</string>
 </resources>
