@@ -23,9 +23,7 @@ class CurrentPresenter : MvpPresenter<CurrentView>() {
 
         currentWeatherDao.getLast().observeForever { response ->
             response?.let {
-                val result = "City: ${it.cityName}\n" +
-                        "Country: ${it.sys.country}\n" +
-                        "Description: ${it.weather.first().description.capitalize()}\n" +
+                val result = "Description: ${it.weather.first().description.capitalize()}\n" +
                         "Temperature: ${it.main.temp} °C\n" +
                         "Wind speed: ${it.wind.speed} m/s\n" +
                         "Clouds: ${it.clouds.all}%\n" +
@@ -36,6 +34,7 @@ class CurrentPresenter : MvpPresenter<CurrentView>() {
                         "Snow 1h: ${it.snow?.h1} mm\n" +
                         "Snow 3h: ${it.snow?.h3} mm"
 
+                viewState.showLocation("${it.cityName}, ${it.sys.country}")
                 viewState.showTodayWeather(result)
                 viewState.updateIcon(
                     "${AppConstants.OPENWEATHERMAP_ICON_BASE}${it.weather.first().icon}@2x.png"

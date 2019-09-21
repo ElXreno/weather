@@ -31,7 +31,11 @@ class CurrentFragment : MvpAppCompatFragment(), CurrentView {
     }
 
     override fun showTodayWeather(text: String) {
-        todayWeather.text = text
+        currentWeatherInfo.text = text
+    }
+
+    override fun showLocation(text: String) {
+        currentWeatherLocation.text = text
     }
 
     override fun updateIcon(url: String) {
