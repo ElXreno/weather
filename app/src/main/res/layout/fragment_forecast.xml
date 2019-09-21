@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="8dp"
-            android:text="@string/tab_forecast" />
+            android:text="@string/pull_down_for_update" />
 
     </androidx.core.widget.NestedScrollView>
 
