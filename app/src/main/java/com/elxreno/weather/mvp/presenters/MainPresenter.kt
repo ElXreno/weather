@@ -66,7 +66,7 @@ class MainPresenter : MvpPresenter<MainView>() {
     fun requestSingleUpdate() {
         val locationManager =
             App.applicationComponent.getContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val locationProvider: String = LocationManager.NETWORK_PROVIDER
+        val locationProvider: String = LocationManager.GPS_PROVIDER
 
         locationManager.requestSingleUpdate(
             locationProvider,
