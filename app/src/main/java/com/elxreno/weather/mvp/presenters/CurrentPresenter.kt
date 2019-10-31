@@ -3,7 +3,7 @@ package com.elxreno.weather.mvp.presenters
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.elxreno.weather.App
-import com.elxreno.weather.AppConstants
+import com.elxreno.weather.IconHelper
 import com.elxreno.weather.data.dao.CurrentWeatherDao
 import com.elxreno.weather.mvp.views.CurrentView
 import javax.inject.Inject
@@ -34,11 +34,13 @@ class CurrentPresenter : MvpPresenter<CurrentView>() {
                         "Snow 1h: ${it.snow?.h1} mm\n" +
                         "Snow 3h: ${it.snow?.h3} mm"
 
+                val iconId = it.weather.first().id
+                val isDay = (System.currentTimeMillis() / 1000L) <= it.sys.sunset
+                val icon = IconHelper().getDrawable(iconId, isDay)
+
                 viewState.showLocation("${it.cityName}, ${it.sys.country}")
                 viewState.showTodayWeather(result)
-                viewState.updateIcon(
-                    "${AppConstants.OPENWEATHERMAP_ICON_BASE}${it.weather.first().icon}@2x.png"
-                )
+                viewState.updateIcon(icon)
             }
         }
     }

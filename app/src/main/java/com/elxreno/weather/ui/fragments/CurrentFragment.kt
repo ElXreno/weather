@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.elxreno.weather.R
-import com.elxreno.weather.glide.GlideApp
 import com.elxreno.weather.mvp.presenters.CurrentPresenter
 import com.elxreno.weather.mvp.views.CurrentView
 import kotlinx.android.synthetic.main.fragment_current.*
@@ -38,10 +37,7 @@ class CurrentFragment : MvpAppCompatFragment(), CurrentView {
         currentWeatherLocation.text = text
     }
 
-    override fun updateIcon(url: String) {
-        GlideApp
-            .with(this)
-            .load(url)
-            .into(currentWeatherIcon)
+    override fun updateIcon(drawable: Int) {
+        currentWeatherIcon.setImageResource(drawable)
     }
 }
