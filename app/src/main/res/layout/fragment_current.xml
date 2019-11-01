@@ -1,153 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/weatherIcon"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/weather_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationInfo"
-        app:srcCompat="@drawable/ic_not_available" />
-
-    <ImageView
-        android:id="@+id/cloudIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/cloud_icon"
-        app:layout_constraintBottom_toTopOf="@+id/windSpeedInfo"
-        app:layout_constraintEnd_toStartOf="@+id/windSpeedIcon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/windSpeedIcon"
-        app:srcCompat="@drawable/ic_cloud" />
-
-    <ImageView
-        android:id="@+id/windSpeedIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:contentDescription="@string/wind_speed_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperatureInfo"
-        app:srcCompat="@drawable/ic_wind" />
-
-    <ImageView
-        android:id="@+id/windDirectionIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/wind_direction_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/windSpeedIcon"
-        app:layout_constraintTop_toTopOf="@+id/windSpeedIcon"
-        app:srcCompat="@drawable/ic_compass" />
-
-    <ImageView
-        android:id="@+id/pressureIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/pressure_icon"
-        app:layout_constraintEnd_toEndOf="@+id/windSpeedIcon"
-        app:layout_constraintStart_toStartOf="@+id/cloudIcon"
-        app:layout_constraintTop_toBottomOf="@+id/windSpeedInfo"
-        app:srcCompat="@drawable/ic_barometer" />
-
-    <ImageView
-        android:id="@+id/humidityIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/humidity_icon"
-        app:layout_constraintEnd_toEndOf="@+id/windDirectionIcon"
-        app:layout_constraintStart_toStartOf="@+id/windSpeedIcon"
-        app:layout_constraintTop_toBottomOf="@+id/windSpeedInfo"
-        app:srcCompat="@drawable/ic_humidity" />
-
-    <TextView
-        android:id="@+id/locationInfo"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/unknown_location"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/temperatureInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/pull_down_for_update"
-        android:textAlignment="center"
-        android:textColor="#42A5F5"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherIcon" />
+        <ImageView
+            android:id="@+id/weatherIcon"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/weather_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationInfo"
+            app:srcCompat="@drawable/ic_not_available" />
 
-    <TextView
-        android:id="@+id/cloudInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/not_available"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/cloudIcon"
-        app:layout_constraintStart_toStartOf="@+id/cloudIcon"
-        app:layout_constraintTop_toBottomOf="@+id/cloudIcon" />
+        <ImageView
+            android:id="@+id/cloudIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/cloud_icon"
+            app:layout_constraintBottom_toTopOf="@+id/windSpeedInfo"
+            app:layout_constraintEnd_toStartOf="@+id/windSpeedIcon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/windSpeedIcon"
+            app:srcCompat="@drawable/ic_cloud" />
 
-    <TextView
-        android:id="@+id/windSpeedInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/not_available"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/windSpeedIcon"
-        app:layout_constraintStart_toStartOf="@+id/windSpeedIcon"
-        app:layout_constraintTop_toBottomOf="@+id/windSpeedIcon" />
+        <ImageView
+            android:id="@+id/windSpeedIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:contentDescription="@string/wind_speed_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/temperatureInfo"
+            app:srcCompat="@drawable/ic_wind" />
 
-    <TextView
-        android:id="@+id/windDirectionInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/not_available"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/windDirectionIcon"
-        app:layout_constraintStart_toStartOf="@+id/windDirectionIcon"
-        app:layout_constraintTop_toBottomOf="@+id/windDirectionIcon" />
+        <ImageView
+            android:id="@+id/windDirectionIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/wind_direction_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/windSpeedIcon"
+            app:layout_constraintTop_toTopOf="@+id/windSpeedIcon"
+            app:srcCompat="@drawable/ic_compass" />
 
-    <TextView
-        android:id="@+id/pressureInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/not_available"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/pressureIcon"
-        app:layout_constraintStart_toStartOf="@+id/pressureIcon"
-        app:layout_constraintTop_toBottomOf="@+id/pressureIcon" />
+        <ImageView
+            android:id="@+id/pressureIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/pressure_icon"
+            app:layout_constraintEnd_toEndOf="@+id/windSpeedIcon"
+            app:layout_constraintStart_toStartOf="@+id/cloudIcon"
+            app:layout_constraintTop_toBottomOf="@+id/windSpeedInfo"
+            app:srcCompat="@drawable/ic_barometer" />
 
-    <TextView
-        android:id="@+id/humidityInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/not_available"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/humidityIcon"
-        app:layout_constraintStart_toStartOf="@+id/humidityIcon"
-        app:layout_constraintTop_toBottomOf="@+id/humidityIcon" />
+        <ImageView
+            android:id="@+id/humidityIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/humidity_icon"
+            app:layout_constraintEnd_toEndOf="@+id/windDirectionIcon"
+            app:layout_constraintStart_toStartOf="@+id/windSpeedIcon"
+            app:layout_constraintTop_toBottomOf="@+id/windSpeedInfo"
+            app:srcCompat="@drawable/ic_humidity" />
 
+        <TextView
+            android:id="@+id/locationInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/unknown_location"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/temperatureInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/pull_down_for_update"
+            android:textAlignment="center"
+            android:textColor="#42A5F5"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weatherIcon" />
+
+        <TextView
+            android:id="@+id/cloudInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_available"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/cloudIcon"
+            app:layout_constraintStart_toStartOf="@+id/cloudIcon"
+            app:layout_constraintTop_toBottomOf="@+id/cloudIcon" />
+
+        <TextView
+            android:id="@+id/windSpeedInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_available"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/windSpeedIcon"
+            app:layout_constraintStart_toStartOf="@+id/windSpeedIcon"
+            app:layout_constraintTop_toBottomOf="@+id/windSpeedIcon" />
+
+        <TextView
+            android:id="@+id/windDirectionInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_available"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/windDirectionIcon"
+            app:layout_constraintStart_toStartOf="@+id/windDirectionIcon"
+            app:layout_constraintTop_toBottomOf="@+id/windDirectionIcon" />
+
+        <TextView
+            android:id="@+id/pressureInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_available"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/pressureIcon"
+            app:layout_constraintStart_toStartOf="@+id/pressureIcon"
+            app:layout_constraintTop_toBottomOf="@+id/pressureIcon" />
+
+        <TextView
+            android:id="@+id/humidityInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_available"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/humidityIcon"
+            app:layout_constraintStart_toStartOf="@+id/humidityIcon"
+            app:layout_constraintTop_toBottomOf="@+id/humidityIcon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
