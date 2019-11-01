@@ -23,23 +23,23 @@ class CurrentPresenter : MvpPresenter<CurrentView>() {
 
         currentWeatherDao.getLast().observeForever { response ->
             response?.let {
-                val result = "Description: ${it.weather.first().description.capitalize()}\n" +
-                        "Temperature: ${it.main.temp} °C\n" +
-                        "Wind speed: ${it.wind.speed} m/s\n" +
-                        "Clouds: ${it.clouds.all}%\n" +
-                        "Humidity: ${it.main.humidity}%\n" +
-                        "Pressure: ${it.main.pressure} hPa\n" +
-                        "Rain 1h: ${it.rain?.h1} mm\n" +
-                        "Rain 3h: ${it.rain?.h3} mm\n" +
-                        "Snow 1h: ${it.snow?.h1} mm\n" +
-                        "Snow 3h: ${it.snow?.h3} mm"
-
                 val iconId = it.weather.first().id
                 val isDay = (System.currentTimeMillis() / 1000L) <= it.sys.sunset
                 val icon = IconHelper().getDrawable(iconId, isDay)
 
-                viewState.showLocation("${it.cityName}, ${it.sys.country}")
-                viewState.showTodayWeather(result)
+                viewState.updateInfo(
+                    String.format("%s, %s", it.cityName, it.sys.country),
+                    String.format(
+                        "%.0f °C | %s",
+                        it.main.temp,
+                        it.weather.first().description
+                    ),
+                    String.format("%d%%", it.clouds.all),
+                    String.format("%.0f m/s", it.wind.speed),
+                    String.format("%d", it.wind.deg),
+                    String.format("%.0f hPa", it.main.pressure),
+                    String.format("%.0f%%", it.main.humidity)
+                )
                 viewState.updateIcon(icon)
             }
         }

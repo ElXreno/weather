@@ -21,6 +21,7 @@ import com.elxreno.weather.data.dto.ForecastWeatherDto
 import com.elxreno.weather.mvp.views.MainView
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import javax.inject.Inject
 
 @InjectViewState
@@ -35,6 +36,17 @@ class MainPresenter : MvpPresenter<MainView>() {
 
     init {
         App.applicationComponent.inject(this)
+    }
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+
+        val hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        if (hours in 5..18) {
+            viewState.updateBackgroundImage(R.drawable.background_day)
+        } else {
+            viewState.updateBackgroundImage(R.drawable.background_night)
+        }
     }
 
     fun onRequestPermissionsResult(

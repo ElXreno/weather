@@ -13,8 +13,7 @@ const val FORECAST_WEATHER_ID = 0
 data class ForecastWeatherDto(
     val cod: String,
     val message: Double,
-    @Embedded(prefix = "city_")
-    val city: City,
+    @Embedded(prefix = "city_") val city: City,
     val cnt: Int,
     val list: List<Item>
 ) {

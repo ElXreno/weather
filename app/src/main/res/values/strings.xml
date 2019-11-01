@@ -8,4 +8,12 @@
     <string name="something_went_wrong">Something went wrong</string>
     <string name="pull_down_for_update">Pull down for update</string>
     <string name="weather_icon">Weather icon</string>
+    <string name="background_image">Background image</string>
+    <string name="unknown_location">Unknown location</string>
+    <string name="not_available">N/A</string>
+    <string name="cloud_icon">cloud icon</string>
+    <string name="wind_speed_icon">wind speed icon</string>
+    <string name="wind_direction_icon">wind direction icon</string>
+    <string name="pressure_icon">pressure icon</string>
+    <string name="humidity_icon">humidity icon</string>
 </resources>

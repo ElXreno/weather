@@ -29,15 +29,25 @@ class CurrentFragment : MvpAppCompatFragment(), CurrentView {
             CurrentFragment()
     }
 
-    override fun showTodayWeather(text: String) {
-        currentWeatherInfo.text = text
-    }
-
-    override fun showLocation(text: String) {
-        currentWeatherLocation.text = text
-    }
-
     override fun updateIcon(drawable: Int) {
-        currentWeatherIcon.setImageResource(drawable)
+        weatherIcon.setImageResource(drawable)
+    }
+
+    override fun updateInfo(
+        location: String,
+        temperature: String,
+        cloudiness: String,
+        windSpeed: String,
+        windDirection: String,
+        pressure: String,
+        humidity: String
+    ) {
+        locationInfo.text = location
+        temperatureInfo.text = temperature
+        cloudInfo.text = cloudiness
+        windSpeedInfo.text = windSpeed
+        windDirectionInfo.text = windDirection
+        pressureInfo.text = pressure
+        humidityInfo.text = humidity
     }
 }
