@@ -85,6 +85,10 @@ class MainActivity : MvpAppCompatActivity(), MainView, SwipeRefreshLayout.OnRefr
         swipeToRefresh.isRefreshing = isRefreshing
     }
 
+    override fun setStyle(style: Int) {
+        setTheme(style)
+    }
+
     override fun updateBackgroundImage(drawable: Int) {
         backgroundImage.setImageResource(drawable)
     }

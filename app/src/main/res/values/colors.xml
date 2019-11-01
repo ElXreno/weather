@@ -3,5 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF5722</color>
-    <color name="textColor">#E6000000</color>
+    <color name="textColorDay">#E6000000</color>
+    <color name="textColorNight">#E6FAFAFA</color>
 </resources>

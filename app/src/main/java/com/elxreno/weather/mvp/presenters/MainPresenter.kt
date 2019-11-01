@@ -44,8 +44,10 @@ class MainPresenter : MvpPresenter<MainView>() {
         val hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         if (hours in 6..17) {
             viewState.updateBackgroundImage(R.drawable.background_day)
+            viewState.setStyle(R.style.AppTheme_Day)
         } else {
             viewState.updateBackgroundImage(R.drawable.background_night)
+            viewState.setStyle(R.style.AppTheme_Night)
         }
     }
 

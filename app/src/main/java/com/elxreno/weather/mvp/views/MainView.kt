@@ -9,5 +9,6 @@ interface MainView : MvpView {
     fun showToast(text: Int, runOnUiThread: Boolean = false)
     fun showToast(text: String, runOnUiThread: Boolean = false)
     fun setRefreshing(isRefreshing: Boolean)
+    fun setStyle(style: Int)
     fun updateBackgroundImage(drawable: Int)
 }
