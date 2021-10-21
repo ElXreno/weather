@@ -113,7 +113,7 @@ class MainPresenter : MvpPresenter<MainView>() {
                     }
 
                     override fun onError(e: Throwable) {
-                        viewState.showToast(e.localizedMessage.orEmpty(), true)
+                        viewState.showToast(e.localizedMessage.orEmpty())
                         viewState.setRefreshing(false)
                     }
 
@@ -133,7 +133,7 @@ class MainPresenter : MvpPresenter<MainView>() {
                     }
 
                     override fun onError(e: Throwable) {
-                        viewState.showToast(e.localizedMessage.orEmpty(), true)
+                        viewState.showToast(e.localizedMessage.orEmpty())
                         viewState.setRefreshing(false)
                     }
 

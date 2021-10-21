@@ -75,11 +75,6 @@ dependencies {
     implementation "tech.schoolhelper:moxy-x-androidx:$moxyVersion"
     kapt "tech.schoolhelper:moxy-x-compiler:$moxyVersion"
 
-    // Anko
-    ext.ankoVersion = "0.10.8"
-    implementation "org.jetbrains.anko:anko-commons:$ankoVersion"
-    implementation "org.jetbrains.anko:anko-design:$ankoVersion"
-
     // Retrofit
     ext.retrofitVersion = "2.8.1"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"

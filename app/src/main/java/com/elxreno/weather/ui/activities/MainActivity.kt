@@ -2,6 +2,7 @@ package com.elxreno.weather.ui.activities
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -15,7 +16,6 @@ import com.elxreno.weather.ui.adapters.PagerAdapter
 import com.elxreno.weather.ui.fragments.CurrentFragment
 import com.elxreno.weather.ui.fragments.ForecastFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.toast
 
 
 class MainActivity : MvpAppCompatActivity(), MainView, SwipeRefreshLayout.OnRefreshListener {
@@ -73,12 +73,16 @@ class MainActivity : MvpAppCompatActivity(), MainView, SwipeRefreshLayout.OnRefr
         presenter.onRequestPermissionsResult(requestCode, grantResults)
     }
 
-    override fun showToast(text: Int, runOnUiThread: Boolean) {
-        if (runOnUiThread) runOnUiThread { toast(text) } else toast(text)
+    override fun showToast(text: Int) {
+        ContextCompat.getMainExecutor(baseContext).execute {
+            Toast.makeText(applicationContext, getText(text), Toast.LENGTH_SHORT).show()
+        }
     }
 
-    override fun showToast(text: String, runOnUiThread: Boolean) {
-        if (runOnUiThread) runOnUiThread { toast(text) } else toast(text)
+    override fun showToast(text: String) {
+        ContextCompat.getMainExecutor(baseContext).execute {
+            Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun setRefreshing(isRefreshing: Boolean) {
