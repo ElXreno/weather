@@ -3,26 +3,29 @@ apply plugin: "kotlin-android"
 apply plugin: "kotlin-android-extensions"
 apply plugin: "kotlin-kapt"
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     signingConfigs {
         defaultSign {
             storeFile file("../weather.jks")
-            storePassword System.env.WEATHER_PASSWORD ?: WEATHER_PASSWORD
-            keyAlias = System.env.WEATHER_ALIAS ?: WEATHER_ALIAS
-            keyPassword System.env.WEATHER_PASSWORD ?: WEATHER_PASSWORD
+            storePassword keystoreProperties["weatherPassword"]
+            keyAlias keystoreProperties["weatherAlias"]
+            keyPassword keystoreProperties["weatherPassword"]
         }
     }
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdk 31
     defaultConfig {
         applicationId "com.elxreno.weather"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "openWeatherMapKey", System.env.OPENWEATHERMAP_KEY ?: openWeatherMapKey
+        buildConfigField "String", "openWeatherMapKey", keystoreProperties["openWeatherMapKey"]
     }
     buildTypes {
         release {
@@ -52,19 +55,19 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // AndroidX stuff
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation "androidx.constraintlayout:constraintlayout:1.1.3"
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     // Material stuff
-    implementation "com.google.android.material:material:1.1.0"
+    implementation 'com.google.android.material:material:1.4.0'
 
     // Tests stuff
     testImplementation "junit:junit:4.13"
-    androidTestImplementation "androidx.test:runner:1.2.0"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Moxy
     ext.moxyVersion = "1.7.0"
@@ -87,14 +90,14 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.5.0'
 
     // Room
-    ext.roomVersion = "2.2.5"
+    ext.roomVersion = '2.3.0'
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-rxjava2:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     testImplementation "androidx.room:room-testing:$roomVersion"
 
     // Dagger
-    ext.daggerVersion = "2.27"
+    ext.daggerVersion = "2.39.1"
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"

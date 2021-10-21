@@ -85,14 +85,14 @@ class MainPresenter : MvpPresenter<MainView>() {
         locationManager.requestSingleUpdate(
             locationProvider,
             object : LocationListener {
-                override fun onLocationChanged(location: Location?) {
+                override fun onLocationChanged(location: Location) {
                     Log.d("location", location.toString())
                     updateWeatherInfo(location)
                 }
 
                 override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {}
-                override fun onProviderEnabled(p0: String?) {}
-                override fun onProviderDisabled(p0: String?) {}
+                override fun onProviderEnabled(provider: String) {}
+                override fun onProviderDisabled(provider: String) {}
             },
             Looper.myLooper()
         )
